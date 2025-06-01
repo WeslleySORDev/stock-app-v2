@@ -1,6 +1,6 @@
 import { Product } from "./product";
 
-export interface StockCount {
+export interface Inventory {
     id: string;
     creator: string;
     name: string;
