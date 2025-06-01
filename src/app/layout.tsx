@@ -6,7 +6,7 @@ import { InventoryProvider } from "@/contexts/InventoryContext";
 const robotoCondensed = Roboto_Condensed({
   variable: "--font-roboto-condensed",
   subsets: ["latin"],
-  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"]
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
 });
 
 export const metadata: Metadata = {
@@ -21,12 +21,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-BR">
-      <body
-        className={`${robotoCondensed.variable} antialiased`}
-      >
-        <InventoryProvider>
-          {children}
-        </InventoryProvider>
+      <body className={`${robotoCondensed.variable} antialiased`}>
+        <InventoryProvider>{children}</InventoryProvider>
       </body>
     </html>
   );
