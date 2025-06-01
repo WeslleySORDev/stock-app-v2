@@ -2,7 +2,7 @@
 
 import { createContext, ReactNode, useContext, useEffect, useState } from "react";
 import { Inventory } from "@/types/inventory";
-import { collection, doc, onSnapshot, setDoc } from "firebase/firestore";
+import { collection, deleteDoc, doc, onSnapshot, setDoc } from "firebase/firestore";
 import { db } from "@/data/firebase";
 
 interface InventoryContextProps {
@@ -71,6 +71,11 @@ export const InventoryProvider = ({ children }: InventoryProviderProps) => {
             createdAt: newInventory.createdAt,
             products: newInventory.products
         })
+    }
+
+    const deleteInventory = async(id: string) => {
+        const inventoryDocRef = doc(db, "inventories", id);
+        await deleteDoc(inventoryDocRef)
     }
     return (
         <InventoryContext.Provider
