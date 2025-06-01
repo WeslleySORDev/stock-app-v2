@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -7,7 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useInventory } from "@/contexts/InventoryContext";
 import { Product } from "@/types/product";
-import { ArrowLeft, Minus, Package, Plus } from "lucide-react";
+import { ArrowLeft, Package, Plus } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 
