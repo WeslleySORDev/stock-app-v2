@@ -54,7 +54,7 @@ export const InventoryProvider = ({ children }: InventoryProviderProps) => {
       setInventories(orderedInventories);
     });
     return () => unsubscribe();
-  }, []);
+  }, [inventoriesCollectionRef]);
 
   const addInventory = async (
     inventoryData: Omit<Inventory, "id" | "createdAt">
