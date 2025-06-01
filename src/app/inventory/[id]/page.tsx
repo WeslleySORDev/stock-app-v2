@@ -86,7 +86,7 @@ export default function InventoryPage({ params }: InventoryComponentProps) {
   return (
     <div className="min-h-screen print:bg-white print-content">
       <div className="container mx-auto px-4 py-8 print:px-0 print:py-0">
-        <div className="flex items-center gap-4 mb-8 print:hidden">
+        <div className="sticky top-0 bg-background py-4 px-2 flex items-center gap-4 mb-8 print:hidden">
           <Link className="mr-8" href="/">
             <Button variant="outline" size="icon">
               <ArrowLeft className="h-4 w-4" />
@@ -150,7 +150,7 @@ export default function InventoryPage({ params }: InventoryComponentProps) {
           </div>
         </div>
 
-        <div className="print:hidden">
+        <div className="print:hidden mt-4">
           <Card className="sticky top-8">
             <CardHeader>
               <CardTitle className="flex items-center gap-2">

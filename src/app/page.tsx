@@ -33,7 +33,7 @@ export default function Home() {
   return (
     <div className="min-h-screen">
       <div className="container mx-auto px-4 py-8">
-        <header className="flex items-center justify-between mb-8">
+        <header className="sticky top-0 py-4 bg-background flex flex-col gap-6 items-start mb-8 lg:flex-row lg:gap-0 lg:justify-between">
           <div>
             <h1 className="text-3xl font-bold text-gray-900">
               Controle de estoque

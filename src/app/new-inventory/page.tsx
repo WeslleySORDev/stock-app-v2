@@ -86,8 +86,10 @@ export default function NewInventoryPage() {
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
-                  <div>
-                    <Label htmlFor="count-name">Nome da Contagem</Label>
+                  <div className="space-y-2">
+                    <Label className="" htmlFor="count-name">
+                      Nome da Contagem
+                    </Label>
                     <Input
                       id="count-name"
                       placeholder="Ex: Contagem Janeiro 2024"
@@ -95,7 +97,7 @@ export default function NewInventoryPage() {
                       onChange={(e) => setInventoryName(e.target.value)}
                     />
                   </div>
-                  <div>
+                  <div className="space-y-2">
                     <Label htmlFor="owner-name">
                       Nome da Pessoa que está contando
                     </Label>
@@ -111,11 +113,11 @@ export default function NewInventoryPage() {
             </Card>
 
             <Card>
-              <CardHeader className="flex flex-row items-center justify-between">
-                <CardTitle>Produtos no Estoque</CardTitle>
+              <CardHeader className="flex flex-col gap-2">
+                <CardTitle className="mx-auto">Produtos no Estoque</CardTitle>
                 <Button
                   onClick={() => setIsAddProductModalOpen(true)}
-                  className="gap-2"
+                  className="w-full gap-2"
                 >
                   <Plus className="h-4 w-4" />
                   Adicionar Item
@@ -123,6 +125,11 @@ export default function NewInventoryPage() {
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
+                  {inventoryProducts.length <= 0 ? (
+                    <div className="flex items-center justify-center py-8">
+                      <span>Nenhum item adicionado ainda !</span>
+                    </div>
+                  ) : null}
                   {inventoryProducts.map((product) => (
                     <div
                       key={product.code}
