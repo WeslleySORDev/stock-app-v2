@@ -33,35 +33,9 @@ interface InventoryProviderProps {
   children: ReactNode;
 }
 
-const DEFAULT_INVENTORY: Inventory[] = [
-  {
-    id: "ac3fb178-6779-4a98-a2da-a310b7826a14",
-    name: "Contagem Atlas",
-    creator: "Weslley",
-    createdAt: Date.now(),
-    products: [
-      {
-        code: "8000",
-        name: "Kit Verniz 8000",
-        quantity: 20,
-      },
-      {
-        code: "6100",
-        name: "Kit Verniz 6100",
-        quantity: 10,
-      },
-      {
-        code: "8937",
-        name: "Verniz 8937",
-        quantity: 2,
-      },
-    ],
-  },
-];
-
 export const InventoryProvider = ({ children }: InventoryProviderProps) => {
   const [inventories, setInventories] =
-    useState<Inventory[]>(DEFAULT_INVENTORY);
+    useState<Inventory[]>([]);
   const inventoriesCollectionRef = collection(db, "inventories");
 
   useEffect(() => {
