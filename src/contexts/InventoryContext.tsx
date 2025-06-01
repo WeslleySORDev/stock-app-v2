@@ -45,7 +45,7 @@ export const InventoryProvider = ({ children }: InventoryProviderProps) => {
           ({
             id: doc.id,
             ...doc.data(),
-            createdAt: doc.data()?.createdAt?.toDate().getTime() || Date.now(),
+            createdAt: doc.data()?.createdAt?.toDate?.().getTime() || Date.now(),
           } as Inventory)
       );
       const orderedInventories = [...fetchedInventories].sort(
@@ -62,13 +62,13 @@ export const InventoryProvider = ({ children }: InventoryProviderProps) => {
     const newInventoryDocRef = doc(inventoriesCollectionRef);
     const newInventory: Inventory = {
       id: newInventoryDocRef.id,
-      createdAt: Date.now(),
+      createdAt: new Date().getTime(),
       ...inventoryData,
     };
     await setDoc(newInventoryDocRef, {
       creator: newInventory.creator,
       name: newInventory.name,
-      createdAt: newInventory.createdAt,
+      createdAt: new Date(),
       products: newInventory.products,
     });
   };

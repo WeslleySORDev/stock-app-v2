@@ -1,17 +1,21 @@
 "use client";
 
+import { AddProductModal } from "@/components/add-product-modal";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useInventory } from "@/contexts/InventoryContext";
+import { Inventory } from "@/types/inventory";
 import { Product } from "@/types/product";
 import { ArrowLeft, Package, Plus } from "lucide-react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 export default function NewInventoryPage() {
+  const router = useRouter();
   const { addInventory } = useInventory();
   const [inventoryName, setInventoryName] = useState("");
   const [inventoryCreatorName, setInventoryCreatorName] = useState("");
@@ -26,6 +30,30 @@ export default function NewInventoryPage() {
           : product
       )
     );
+  };
+
+  const handleAddProduct = (product: Product) => {
+    setInventoryProducts((prev) => [...prev, product]);
+    setIsAddProductModalOpen(false);
+  };
+
+  const handleCreateNewInventory = async () => {
+    if (
+      inventoryName !== "" &&
+      inventoryCreatorName !== "" &&
+      inventoryProducts.length > 0
+    ) {
+      const newInventory: Omit<Inventory, "id" | "createdAt"> = {
+        name: inventoryName,
+        creator: inventoryCreatorName,
+        products: inventoryProducts,
+      };
+      setInventoryName("");
+      setInventoryCreatorName("");
+      setInventoryProducts([]);
+      await addInventory(newInventory);
+      router.push("/");
+    }
   };
 
   const totalItems = inventoryProducts.reduce(
@@ -135,6 +163,52 @@ export default function NewInventoryPage() {
           </div>
         </div>
       </div>
+      <div>
+        <div>
+          <Card className="sticky top-8">
+            <CardHeader>
+              <CardTitle>Resumo da Contagem</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-4">
+                <div className="flex justify-between">
+                  <span className="text-gray-600">Total de produtos:</span>
+                  <span className="font-semibold">
+                    {inventoryProducts.length}
+                  </span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-gray-600">Total de itens:</span>
+                  <span className="font-semibold">{totalItems}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-gray-600">Data:</span>
+                  <span className="font-semibold">
+                    {new Date().toLocaleDateString("pt-BR")}
+                  </span>
+                </div>
+                <div className="pt-4 border-t">
+                  <Button
+                    onClick={handleCreateNewInventory}
+                    className="w-full"
+                    disabled={
+                      !inventoryName.trim() || !inventoryCreatorName.trim()
+                    }
+                  >
+                    Salvar Contagem
+                  </Button>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      </div>
+
+      <AddProductModal
+        isOpen={isAddProductModalOpen}
+        onClose={() => setIsAddProductModalOpen(false)}
+        onConfirm={handleAddProduct}
+      />
     </div>
   );
 }
